@@ -43,3 +43,42 @@ def modifier_statut_todo():
             print(f"Le todo '{todo['titre']}' est maintenant marqué comme 'À fair'.")
     except (ValueError, IndexError):
         print("Choix invalide, veuillez entrer un numéro valide.")
+
+# Fonction pour supprimer un todo
+def supprimer_todo():
+    lister_todos()
+    if not todos:
+        print("Aucun todo à supprimer.")
+        return
+    
+    try:
+        choix = int(input("Entrez le numéro du todo à supprimer (0 pour annuler): "))
+        if choix == 0:
+            return
+        
+        todo = todos.pop(choix - 1)
+        print(f"Le todo '{todo['titre']}' a été supprimé.")
+    except (ValueError, IndexError):
+        print("Choix invalide, veuillez entrer un numéro valide.")
+
+# Menu principal
+choix = ''
+while choix != 'q':
+    # Affichage des choix
+    print('\n==== Menu principal ====')
+    print('1: Lister les todos')
+    print('2: Créer un todo')
+    print('3: Changer le statut d\'un todo')
+    print('4: Supprimer un todo')
+    print('q: quitter')
+    print('========================')
+    
+    # Actions suivant le choix
+    choix = input('=> Choix : ')
+    match choix:
+        case '1': lister_todos()
+        case '2': creer_todo()
+        case '3': modifier_statut_todo()
+        case '4': supprimer_todo()
+        case 'q': print('Au revoir')
+        case _: print('Choix invalide')
