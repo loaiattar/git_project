@@ -20,3 +20,26 @@ def creer_todo():
     }
     todos.append(todo)
     print(f"Todo '{titre}' créé avec le statut 'À faire'..")
+
+# Fonction pour modifier le statut d'un todo
+def modifier_statut_todo():
+    lister_todos()
+    if not todos:
+        print("Aucun todo à modifier.")
+        return
+    
+    try:
+        choix = int(input("Entrez le numéro du todo à modifier (0 pour annuler): "))
+        if choix == 0:
+            return
+        
+        todo = todos[choix - 1]
+        if todo['statut'] == 'À faire':
+            todo['statut'] = 'Fait'
+            print(f"Le todo '{todo['titre']}' est maintenant marqué comme 'Fait'.")
+        elif todo['statut'] == 'Fait':
+            # corriger l'erreur :
+            todo['statut'] = 'À faire'  # Provoque un comportement normal
+            print(f"Le todo '{todo['titre']}' est maintenant marqué comme 'À fair'.")
+    except (ValueError, IndexError):
+        print("Choix invalide, veuillez entrer un numéro valide.")
